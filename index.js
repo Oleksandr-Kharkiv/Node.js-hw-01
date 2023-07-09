@@ -1,4 +1,4 @@
-import {program} from "commander";
+import yargs from "yargs";
 
 import contactsService from "./contacts.js"
 
@@ -24,20 +24,5 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       console.warn('\x1B[31m Unknown action type!');
   }
 }
-
-// invokeAction({action:"list"});
-// invokeAction({action: "get", id: 'C9sjBfCo4UJCWjzBnOtxl'});
-// invokeAction({action: "add", name: "Ivan Ivanov", email: "ivan@ukr.net", phone: "234-23-45"});
-// invokeAction({action: "remove", id: 'tpWNLuooDWj0G2UubDWbB'});
-
-program
-.option("--action <type>")
-.option("--id <type>")
-.option("--name <type>")
-.option("--email <type>")
-.option("--phone <type>")
-
-program.parse();
-
-const options = program.opts();
-invokeAction(options);
+const {argv} = yargs(process.argv.slice(2));
+invokeAction(argv);
